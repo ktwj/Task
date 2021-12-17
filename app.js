@@ -159,7 +159,7 @@ app.post('/list',(req,res)=>{
     let ins = [];
     if(req.body.place != '') {sql +='and place like ? '; ins.push(`%${req.body.place}%`);};
     if(req.body.work != '') {sql += 'and work like ? '; ins.push(`%${req.body.work}%`);};
-    if(req.body.category_id != 0) {sql += 'and category_id=? +1 ';ins.push(req.body.category_id);};
+    if(req.body.category_id != 0) {sql += 'and category_id=? -1 ';ins.push(req.body.category_id);};
     if(req.body.progress != 0) {sql += 'and progress=? ';ins.push(req.body.progress);};
     sql += ';';
 
