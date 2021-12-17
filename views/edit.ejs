@@ -12,8 +12,8 @@
     <h1>作業タスクを編集する</h1>
     <form action="/doneEdit" method="post">
         <input type="hidden" name="id" value="<%=id%>"
-        <input type="date" name="date" value="<%= contents[0].date %>">
-        <input type="text" name="place" value="<%= contents[0].place %>">
+        <input type="date" name="date">
+                <input type="text" name="place" value="<%= contents[0].place %>">
         <!--<input type="file" name="photo" value="<%= //contents[0].photo %>">-->
         <input type="text" name="work" value="<%= contents[0].work %>">
         <select name="category" id="category">
