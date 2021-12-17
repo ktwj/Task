@@ -7,6 +7,7 @@ const ejs = require('ejs');
 const mysql = require('mysql');
 
 const app = express();
+const port = process.env.PORT || 4000;
 const csrfProtection = csrf({ cookie: false });
 
 app.set('views', './views');
