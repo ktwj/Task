@@ -11,9 +11,9 @@
     <a href="/list"><p>戻る</p></a>
     <h1>作業タスクを編集する</h1>
     <form action="/post" method="post">
-        <input type="date" name="date" value="<%= contents[0].date.getFullYear() %>-<%= (contents[0].date.getMonth()<10)? '0'+contents[0].date.getMonth() : contents[0].date.getMonth() %>-<%= (contents[0].date.getDate()<10)? '0'+contents[0].date.getDate() : contents[0].date.getDate() %>">
+        <input type="date" name="date" value="<%= contents[0].date.getFullYear() %>-<%= (contents[0].date.getMonth()<10)? '0'+contents[0].date.getMonth()+1 : contents[0].date.getMonth()+1 %>-<%= (contents[0].date.getDate()<10)? '0'+contents[0].date.getDate() : contents[0].date.getDate() %>">
         <input type="text" name="place" value="<%= contents[0].place %>">
-        <input type="file" name="photo" value="<%= contents[0].photo %>">
+        <!--<input type="file" name="photo" value="<%= //contents[0].photo %>">-->
         <input type="text" name="work" value="<%= contents[0].work %>">
         <select name="category" id="category">
             <option value=0> - -  カテゴリー  - - </option>
