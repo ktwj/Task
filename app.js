@@ -106,7 +106,7 @@ app.get('/post', (req,res) => {
 });
 
 app.post('/post', (req,res) => {
-    if(req.body.work=='' || req.body.place=='' || req.body.date==0 || req.body.category_id==-1 || !req.body.progress ==0){
+    if(req.body.work=='' || req.body.place=='' || checkDate(req.body.date) || req.body.category_id==-1 || !req.body.progress ==0){
         let sql = 'select * from categorys where deleted_at is null';
         let m = '空白があります。';
         con.query(sql,
@@ -310,4 +310,17 @@ function getTime(){
     timestamp.match(/(d{4})(d{2})(d{2})(d{2})(d{2})(d{2})/);
     var datetime = RegExp.$1+'-'+RegExp.$2+'-'+RegExp.$3+' '+RegExp.$4+':'+RegExp.$5+':'+RegExp.$6;
     return timestamp;
+}
+function checkDate(strDate) {
+    if(!strDate.match(/^\d{4}\/\d{2}\/\d{2}$/)){
+        return false;
+    }
+    var y = strDate.split("/")[0];
+    var m = strDate.split("/")[1] - 1;
+    var d = strDate.split("/")[2];
+    var date = new Date(y,m,d);
+    if(date.getFullYear() != y || date.getMonth() != m || date.getDate() != d){
+        return false;
+    }
+    return true;
 }
