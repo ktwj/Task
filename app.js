@@ -225,6 +225,7 @@ app.post('/deleteConfirm', (req,res) => {
 });
 
 app.get('/:id/edit', csrfProtection, (req,res) => {
+    let m = '';
     let sql = 'select * from posts where deleted_at is null and id =?';
     let ins = req.params.id;
     con.query(sql,ins,
@@ -235,7 +236,7 @@ app.get('/:id/edit', csrfProtection, (req,res) => {
             con.query(sql, 
                 (err,categorys) => {
                     if(err) throw err;
-                    res.render('edit.ejs', {contents : results, id: ins , categorys:categorys});
+                    res.render('edit.ejs', {contents : results, id: ins , categorys:categorys, m:m});
                 });
         }
     );
@@ -244,6 +245,7 @@ app.get('/:id/edit', csrfProtection, (req,res) => {
 app.post('/doneEdit', (req,res) => {
     if(req.body.work=='' || req.body.place=='' || req.body.date==null || !req.body.date || req.body.date==0 || req.body.category==-1 || !req.body.progress ==0){
         let sql = 'select * from posts where deleted_at is null and id =?';
+        let m = '空白があります。';
         let ins = req.body.id;
         con.query(sql,ins,
             (err,results) => {
@@ -253,7 +255,7 @@ app.post('/doneEdit', (req,res) => {
                 con.query(sql, 
                     (err,categorys) => {
                         if(err) throw err;
-                        res.render('edit.ejs', {contents : results, id: ins , categorys:categorys});
+                        res.render('edit.ejs', {contents : results, id: ins , categorys:categorys, m:m});
                     });
             }
         );
