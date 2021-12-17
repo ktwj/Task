@@ -7,7 +7,6 @@ const ejs = require('ejs');
 const mysql = require('mysql');
 
 const app = express();
-const port = process.env.PORT || 4000;
 const csrfProtection = csrf({ cookie: false });
 
 app.set('views', './views');
@@ -28,7 +27,38 @@ const con = mysql.createConnection({
     password: '6121bd6e',
     database: 'heroku_2ad1200fa642094'
   });
- 
+
+app.set('port', (process.env.PORT || 5000));
+
+var connection;
+
+function handleDisconnect() {
+    console.log('INFO.CONNECTION_DB: ');
+    connection = mysql.createConnection(db_config);
+    
+    //connection取得
+    connection.connect(function(err) {
+        if (err) {
+            console.log('ERROR.CONNECTION_DB: ', err);
+            setTimeout(handleDisconnect, 1000);
+        }
+    });
+    
+    //error('PROTOCOL_CONNECTION_LOST')時に再接続
+    connection.on('error', function(err) {
+        console.log('ERROR.DB: ', err);
+        if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+            console.log('ERROR.CONNECTION_LOST: ', err);
+            handleDisconnect();
+        } else {
+            throw err;
+        }
+    });
+}
+
+handleDisconnect();
+  
+
 app.get('/', (req, res) => {
     con.query('select * from users', function (err, results) {
         if (err) throw err
