@@ -243,14 +243,7 @@ app.post('/:id/edit', (req,res) => {
                 (err, results) => {
                     if(err) throw err;
 
-                    let sql = 'insert into category_posts(post_id, category_id) value(?,?)'
-                    let ins = [req.params.id, req.body.category];
-                    con.query(sql,ins,
-                        (err, results) => {
-                            if(err) throw err;
-
-                            res.redirect('/list');
-                    });
+                     res.redirect('/list');
             });
     });
 });
