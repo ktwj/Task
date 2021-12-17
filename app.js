@@ -42,7 +42,10 @@ app.get('/register',csrfProtection, (req,res) => {
 });
 
 app.post('/register', csrfProtection,(req,res) => {
-    if (req.body.name=='' || req.body.pass=='') res.render('register.ejs', {fail:results,csrfToken: req.csrfToken() });
+    if (req.body.name=='' || req.body.pass==''){
+        let m = '空白があります。';
+        res.render('register.ejs', {m:m,csrfToken: req.csrfToken() });
+    }
     let sql = 'select * from users where name = ?';
     let ins = req.body.name;
     con.query(sql,ins,

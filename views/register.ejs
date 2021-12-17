@@ -5,8 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>#failed {display:none;color:red;}</style>
-    <script>function red(){failed.style.display = 'block';}</script>
+    <style>
+        #failed {display:none;color:red;}
+        #blanked{display:none;color:red;}
+    </style>
+    <script>
+        function red(){failed.style.display = 'block';}
+        function blank(){blanked.style.display = 'block';}
+    </script>
 </head>
 <body>
     <form action="/register" method="post">
@@ -17,6 +23,7 @@
     </form>
 
     <span id="failed">※その名前は既に登録されています。</span>
+    <span id="blanked">※空白があります。</span>
 
     <% if(typeof fail !== 'undefined') { %>
         <script>red();</script>
@@ -25,6 +32,9 @@
             location.href='/';
         </script>
     <% }else{ %>
+    <% } %>
+    <% if(typeof m !== 'undefined'){ %>
+        <script>blank();</script>
     <% } %>
 </body>
 </html>
