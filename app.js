@@ -103,9 +103,15 @@ app.get('/post', (req,res) => {
 });
 
 app.post('/post', (req,res) => {
-    if (req.body.work=='' || req.body.place==''){
+    if(req.body.work=='' || req.body.place==''){
+        let sql = 'select * from categorys where deleted_at is null';
         let m = '空白があります。';
-        res.render('post.ejs', {m:m});
+        con.query(sql,
+            (err,categorys) => {
+                if(err) throw err;
+                res.render('post.ejs', { categorys : categorys, m:m});
+            }
+        );
     }
 
     sql = 'select * from categorys where deleted_at is null';
