@@ -238,13 +238,13 @@ app.post('/:id/edit', (req,res) => {
             if(err) throw err;
 
             let sql = 'Update posts Set date=?, place=?, work=?, category_id=?, progress=? where id=?';
-            let ins = [req.body.date, req.body.place, req.body.work, req.body.category_id, req.body.progress, req.body.id];
+            let ins = [req.body.date, req.body.place, req.body.work, req.body.category, req.body.progress, req.body.id];
             con.query(sql,ins,
                 (err, results) => {
                     if(err) throw err;
 
                     let sql = 'insert into category_posts(post_id, category_id) value(?,?)'
-                    let ins = [req.params.id, req.body.category_id];
+                    let ins = [req.params.id, req.body.category];
                     con.query(sql,ins,
                         (err, results) => {
                             if(err) throw err;
