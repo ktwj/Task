@@ -232,7 +232,7 @@ app.get('/:id/edit', csrfProtection, (req,res) => {
 app.post('/:id/edit', (req,res) => {
     let sql = 'update category_posts set deleted_at=? where id=?';
     let now = getTime();
-    let ins = [now, req.body.id];
+    let ins = [now, req.params.id];
     con.query(sql,ins,
         (err, results) => {
             if(err) throw err;
@@ -244,7 +244,7 @@ app.post('/:id/edit', (req,res) => {
                     if(err) throw err;
 
                     let sql = 'insert into category_posts(post_id, category_id) value(?,?)'
-                    let ins = [req.body.id, req.body.category_id];
+                    let ins = [req.params.id, req.body.category_id];
                     con.query(sql,ins,
                         (err, results) => {
                             if(err) throw err;
