@@ -16,7 +16,7 @@
                 <div>
                     <tr>
                         <td>日付</td>
-                        <td><input type="hidden" name="date" value="<%= posts.date %>"><%= posts.date.setMonth(Number(posts.date.getMonth())+1) %></td>
+                        <td><input type="hidden" name="date" value="<%= posts.date %>"><% p = posts.date.setMonth(Number(posts.date.getMonth())+1) %><%=p%></td>
                     </tr>
                     <tr>
                         <td>場所</td>
