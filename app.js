@@ -229,10 +229,10 @@ app.get('/:id/edit', csrfProtection, (req,res) => {
     );
 });
 
-app.post('/:id/edit', (req,res) => {
+app.post('/doneEdit', (req,res) => {
     let sql = 'update category_posts set deleted_at=? where id=?';
     let now = getTime();
-    let ins = [now, req.params.id];
+    let ins = [now, req.body.id];
     console.log('AA')
     con.query(sql,ins,
         (err, results) => {
