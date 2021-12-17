@@ -238,9 +238,9 @@ app.get('/top',csrfProtection, (req,res) => {
     res.render('top.ejs');
 });
 
-app.listen(3000, () => {
-    console.log('server start')
-});
+app.listen(port , ()=>{
+    console.log('server listened by port ' + String(port) + ' ...');
+ });
 
 app.get('/test',(req,res)=>{
     res.render('test.ejs');
