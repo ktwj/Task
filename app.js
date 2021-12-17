@@ -22,13 +22,22 @@ app.use(session({
     saveUninitialized: false
 }));
 
+/*
 const con = mysql.createConnection({
     host: 'us-cdbr-east-05.cleardb.net',
     user: 'b9af421ed731e2',
     password: '6121bd6e',
     database: 'heroku_2ad1200fa642094'
   });
- 
+*/
+const con = mysql.createPool({
+    host: 'us-cdbr-east-05.cleardb.net',
+    user: 'b9af421ed731e2',
+    password: '6121bd6e',
+    database: 'heroku_2ad1200fa642094'
+  });
+
+
 app.get('/', (req, res) => {
     con.query('select * from users', function (err, results) {
         if (err) throw err
