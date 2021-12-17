@@ -23,10 +23,10 @@ app.use(session({
 }));
 
 const con = mysql.createConnection({
-    host: 'localhost',
-    user: 'user',
-    password: 'pass',
-    database: 'jstest'
+    host: 'us-cdbr-east-05.cleardb.net',
+    user: 'b9af421ed731e2',
+    password: '6121bd6e',
+    database: 'heroku_2ad1200fa642094'
   });
  
 app.get('/', (req, res) => {
