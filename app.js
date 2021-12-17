@@ -233,17 +233,19 @@ app.post('/:id/edit', (req,res) => {
     let sql = 'update category_posts set deleted_at=? where id=?';
     let now = getTime();
     let ins = [now, req.params.id];
+    console.log('AA')
     con.query(sql,ins,
         (err, results) => {
             if(err) throw err;
 
+            console.log('BB')
             let sql = 'Update posts Set date=?, place=?, work=?, category_id=?, progress=? where id=?';
             let ins = [req.body.date, req.body.place, req.body.work, req.body.category, req.body.progress,  req.body.id];
             con.query(sql,ins,
                 (err, results) => {
                     if(err) throw err;
-
-                     res.redirect('/list');
+                    console.log('CC')
+                    res.redirect('/list');
             });
     });
 });
