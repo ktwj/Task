@@ -229,7 +229,31 @@ app.get('/:id/edit', csrfProtection, (req,res) => {
     );
 });
 
+app.post('/:id/edit',csrfProtection, (req,res) => {
+    let sql = 'update category_posts set deleted_at=? where id=?';
+    let now = getTime();
+    let ins = [now, req.body.id];
+    con.query(sql,ins,
+        (err, results) => {
+            if(err) throw err;
 
+            let sql = 'Update posts Set date=?, place=?, work=?, category_id=?, progress=? where id=?';
+            let ins = [req.body.date, req.body.place, req.body.work, req.body.category_id, req.body.progress, req.body.id];
+            con.query(sql,ins,
+                (err, results) => {
+                    if(err) throw err;
+
+                    let sql = 'insert into category_posts(post_id, category_id) value(?,?)'
+                    let ins = [req.body.id, req.body.category_id];
+                    con.query(sql,ins,
+                        (err, results) => {
+                            if(err) throw err;
+
+                            res.redirect('/list');
+                    });
+            });
+    });
+});
 
 app.get('/logout',csrfProtection, (req, res) => {
     res.render('logout.ejs');
