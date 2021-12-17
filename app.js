@@ -120,7 +120,7 @@ app.post('/post', (req,res) => {
 
 app.post('/postConfirm', (req,res) => {
     let sql = 'insert into posts(date, place, work, category_id, progress, user_id) values(?,?,?,?,?,?);';
-    let ins = [req.body.date, req.body.place, req.body.work, req.body.category_id, req.body.progress, req.body.user_id];
+    let ins = [req.body.date.setMonth(req.body.date.getMonth() + 1), req.body.place, req.body.work, req.body.category_id, req.body.progress, req.body.user_id];
     con.query(sql,ins,
         (err, results) => {
             if(err) throw err;
