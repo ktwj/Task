@@ -42,11 +42,11 @@ app.get('/register',csrfProtection, (req,res) => {
 });
 
 app.post('/register', csrfProtection,(req,res) => {
-    let sql = 'select * from users where  = ?';
+    if (req.body.name=='' || req.body.password==''){res.redirect('register');}
+    let sql = 'select * from users where name = ?';
     let ins = req.body.name;
     con.query(sql,ins,
         (err,results) => {
-            console.log(results[0]);
             if(results[0] !== undefined) res.render('register.ejs', {fail:results,csrfToken: req.csrfToken() });
             else res.render('registerConfirm.ejs', { name:req.body.name, pass:req.body.pass , csrfToken: req.csrfToken()    });
         }
