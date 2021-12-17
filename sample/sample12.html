@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>   
+    #area {
+        width: 400px;
+        margin: auto;
+        overflow: auto;
+        text-align: justify;
+    }
+    #arrow {
+        margin:10px;
+        position:fixed;
+        width:20px;
+        height:20px;
+        display:none;
+    }
+    </style>
+</head>
+<body>
+    <a id="arrow">▲</a>
+    <div id="area">
+        <script>  
+            for(let i = 0; i < 1000; i++){
+                document.writeln(i);
+            }
+        </script>
+    </div>
+    <script>
+        window.addEventListener('scroll', function(){
+            console.log(document.documentElement.getBoundingClientRect().top + document.documentElement.clientHeight);
+            if(document.documentElement.getBoundingClientRect().top + document.documentElement.clientHeight < 0){
+                arrow.style.display = 'block';
+            }else{
+                arrow.style.display = 'none';
+            }
+        });
+        arrow.onclick = (event) =>{
+            scrollTo(0,0);
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>body{width:3000px;height:800px;} #showscroll{position:fixed;}</style>
+</head>
+<body>
+    <div id="showscroll"></div>
+
+    <script>
+        window.addEventListener('scroll', function(){
+            document.getElementById('showscroll').innerHTML = `${pageXOffset}px, ${pageYOffset}px`;
+            if(document.documentElement.getBoundingClientRect().bottom - document.documentElement.clientHeight < 30){
+                multi();
+            }
+        });
+        function multi(){
+            let date = new Date();
+            let content = document.createElement('p');
+            content.innerHTML = `date : ${date} <br>`;
+            document.body.append(content);
+        }
+    </script>
+
+</body>
+</html>

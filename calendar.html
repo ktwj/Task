@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+<div id='calendar'></div>
+
+<script>
+/*
+    let log = console.log;
+
+    function createCalendar(elem,year,month){
+        let date = new Date(year,month-1);
+        const firstDay = date.getDay();
+        const lastDay = checkLastDay(year,month);
+        const weeklength = (firstDay + lastDay>35) ? 6 : (firstDay + lastDay !=28) ? 5 : 4;
+        let frame;
+
+        let div = document.createElement('div');
+
+        div.className = 'calendar';
+
+        function makeRow(){
+            frame = '<table><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>';           
+            for(let i = 1; i <= weeklength ;i++){
+                frame = frame + `<tr align="right" class='w${i}'><td class=0></td><td class=1></td><td class=2></td><td class=3></td><td class=4></td><td class=5></td><td class=6></td></tr>`;
+            }
+            frame = frame + '</table>';
+        }
+
+        makeRow();
+
+        div.innerHTML = frame;
+        document.body.appendChild(div);
+        
+        let weeks = [];
+        for(let i = 1; i <= weeklength; i++ ){
+            eval('var w' + i +' = document.getElementsByClassName(\'w' + i +'\');');
+            eval('weeks.push(w' + i + ');');
+        }
+        let days = 1;
+        let isFirst = true;
+        
+        startloop:
+        for(let week of weeks){
+            if(isFirst){
+                for(let dow of week){
+                    for(let j = 0; j < 7; j++){
+                        j = dow.getElementsByClassName(j)[0].className;
+                        if(firstDay > +j){
+                            continue;
+                        }else{
+                            let mj = dow.getElementsByClassName(j)[0];
+                            mj.innerHTML = days++;
+                        }
+                    }
+                }
+                isFirst = false;
+            }else{
+                for(let dow of week){
+                    for(let j = 0; j < 7; j++){
+                        let mj = dow.getElementsByClassName(j)[0]
+                        mj.innerHTML = days++;
+                        if(lastDay == days-1){
+                            break startloop;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    function checkLastDay(year,month){
+        let lastDay;
+        if(month == 2){
+            if(year%4 == 0 && !year%100 == 0){
+                lastDay = 29;
+            }else{
+                lastDay = 28;
+            }
+        }else if(month == 4|6|9|11){
+            lastDay = 30;
+        }else{
+            lastDay = 31;
+        }
+        return lastDay;
+    }
+    createCalendar('x',2021,9);
+*/
+
+function createCalendar(elem,year,month){
+    let date = new Date(year,month-1);
+    let Dow = date.getDay();
+    let lastDay = checkLastDay(year,month);
+    console.log(month,lastDay);
+    let table = '<table><tr><td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thr</td><td>Fri</td><td>Sat</td></tr><tr>';
+
+    for(let i = 0; i < Dow; i++){
+        table += '<td></td>';
+    }
+    for(let j = 1; j <= lastDay; j++){
+        table += `<td>${j}</td>`;
+        Dow++;
+        if(Dow % 7 ==0){
+            table+='</tr><tr>';
+            Dow  = 0;
+        }
+    }
+    table += '</tr></table>';
+    
+    document.getElementById(elem).innerHTML = table;
+
+    
+    function checkLastDay(year,month){
+        let lastDay;
+        if(month == 2){
+            if(year % 4 == 0 && year % 100 != 0){
+                lastDay = 29;
+            }else{
+                lastDay = 28;
+            }
+        }else if(month == 4 |month==6|month==9|month==11){
+            lastDay = 30;
+        }else{
+            lastDay = 31;
+        }
+        console.log(lastDay);
+        return lastDay;
+    }
+}
+
+createCalendar('calendar',2021,2);
+</script>
+
+</body>
+</html>

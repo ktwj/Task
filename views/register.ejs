@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>#failed {display:none;color:red;}</style>
+    <script>function red(){failed.style.display = 'block';}</script>
+</head>
+<body>
+    <form action="/register" method="post">
+        名前 : <input type="text" name="name"><br>
+        パス : <input type="password" name="pass"><br>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <input type="submit" value="登録する">
+    </form>
+
+    <span id="failed">※その名前は既に登録されています。</span>
+
+    <% if(typeof fail !== 'undefined') { %>
+        <script>red();</script>
+    <% }else if(typeof error !== 'undefined'){ %>
+        <script>
+            location.href='/';
+        </script>
+    <% }else{ %>
+    <% } %>
+</body>
+</html>

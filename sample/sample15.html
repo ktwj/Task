@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+        #promptForm {
+            display: inline-block;
+            padding: 5px 5px 5px 70px;
+            width: 200px;
+            border: 1px solid black;
+            background: white url(https://en.js.cx/clipart/prompt.png) no-repeat left 5px;
+            vertical-align: middle;
+        }
+
+        #promptFormContainer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            display:none;
+        }
+
+        #promptFormContainer:before {
+            display: inline-block;
+            height: 100%;
+            content: '';
+            vertical-align: middle;
+        }
+
+        #promptForm input[name="text"] {
+            display: block;
+            margin: 5px;
+            width: 180px;
+        }
+        #coverDiv {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9000;
+            width: 100%;
+            height: 100%;
+            background-color: gray;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="modal();">Click to show the form</button>
+
+    <div id="promptFormContainer">
+        <form id="promptForm">
+            <div id="promptMessage">Enter something...
+                <br>Please..
+            </div>
+            <input name="text" type="text">
+            <input type="submit" value="Ok">
+            <input type="button" name="cancel" value="Cancel" onclick="canceled()">
+        </form>
+    </div>
+
+    <script>
+        function modal(){
+            promptFormContainer.style.display = 'block';
+            promptForm.text.focus();
+            let coverDiv = document.createElement('div');
+            coverDiv.id = 'coverDiv';
+            document.body.append(coverDiv);
+            document.body.style.overflowY='hidden'
+        }
+
+        function removeDiv(){
+            document.getElementById('coverDiv').remove();
+            document.body.style.overflowY='';
+        }
+
+        promptForm.onsubmit = function(event){
+            let ev = event.target.text.value;
+            if(!ev) return false;
+            alert(ev);
+            console.log(ev);
+            canceled();
+            removeDiv();
+            return false;
+        }
+        function canceled(){
+            promptForm.text.value = '';
+            promptFormContainer.style.display = 'none';
+            removeDiv();
+        }
+
+    </script>
+</body>
+</html>

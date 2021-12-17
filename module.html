@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    async function loadModule(){
+        let heroModule = await import('./module1.js')
+        let hero1 = new heroModule.user("ロト",18);
+        console.log(`勇者${hero1.name} (${hero1.age})`);
+    }
+    loadModule().then(aaa=>{console.log("hero.")}).catch(error=>{alert(`Load Module error`);});
+  </script>
+
+</body>
+</html>

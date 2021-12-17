@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #field {
+          width: 200px;
+          height: 150px;
+          border: 10px solid black;
+          background-color: #00FF00;
+          overflow: hidden;
+          position:absolute;
+        }
+        #ball{
+          position:absolute;
+          left:0;
+          top:0;
+          transition:1s all;
+        }
+        .menu li{
+            display:none;
+        }
+        .menu.open li{
+            display:block;
+        }
+        .menu #title::before{
+            content:'▶';
+        }
+        .menu.open #title::before{
+            content:'▼';
+        }
+      </style>
+    <script>
+        log=console.log;
+    </script>
+
+</head>
+<body>
+
+
+
+
+    <div class="menu">
+        <span id="title">リストの展開</span>
+        <ul>
+            <li>Cake</li>
+            <li>Donut</li>
+            <li>Honey</li>
+        </ul>
+    </div>
+    <script>
+        title.addEventListener("click", function(){
+            let menu = document.querySelector('.menu');
+            menu.classList.toggle('open');
+        });
+    </script>
+
+
+<input type="button" id="e1" value="テキストを隠す">
+<div id="text">Text</div>
+    <script>
+        e1.addEventListener("click", function(){
+            text.hidden = true;
+        });
+    </script><br>
+
+
+<input type="button" id="e2" value="ボタンを隠す">
+    <script>
+        e2.addEventListener("click", function(){
+            document.getElementById('e2').hidden = true;
+        });
+    </script><br><br>
+
+
+  <div id="field">
+    <img src="https://en.js.cx/clipart/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+  </div>
+    <script>
+        field.addEventListener("click", function(event){
+            let fieldCoords = this.getBoundingClientRect();
+        
+            let ballCoords = {
+                left : event.clientX - fieldCoords.left - field.clientLeft - ball.clientWidth/2,
+                top : event.clientY - fieldCoords.top - field.clientTop - ball.clientHeight/2,
+            }
+            if(ballCoords.left < 0) ballCoords.left = 0;
+            if(ballCoords.top < 0) ballCoords.top = 0;
+        
+            ball.style.top = ballCoords.top + 'px';
+            ball.style.left = ballCoords.left + 'px';
+        });
+    </script>
+
+
+
+</body>
+</html>

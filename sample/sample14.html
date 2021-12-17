@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <textarea type="text" id="txt"> 入力 : <span id="result"></span></textarea>
+
+    <script>
+        txt.oninput = function(){
+            result.innerHTML = txt.value;
+        }
+    </script>
+
+
+    <div id="calc">
+        <table>
+            <tr>
+                <td>預金計算機</td>
+            </tr>
+            <tr>
+                <td>初期預金</td>
+                <td><input type="number" id="initD" value="20000"> 円</td>
+            </tr>
+            <tr>
+                <td>運用月数</td>
+                <td>
+                    <select id="months">
+                        <option name="3" value="3">3ヶ月</option>
+                        <option name="6" value="6">6ヶ月</option>
+                        <option name="12" value="12">1年</option>
+                        <option name="18" value="18">1年半</option>
+                        <option name="24" value="24">2年</option>
+                        <option name="36" value="36">3年</option>
+                        <option name="48" value="48">4年</option>
+                        <option name="60" value="60">5年</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>年利</td>
+                <td><input id="ir" type="number" value="5"> ％</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td>was</td>
+                <td>become</td>
+            </tr>
+            <tr>
+                <td><span id="was"></span></td>
+                <td><span id="become"></span></td>
+            </tr>
+            <tr>
+                <td><div id="diaA" style="background-color:red; height:100px; width:40px; position:fixed;"></div></td>
+                <td><div id="diaB" style="background-color:green; height:100px; width:40px; position:fixed;"></div></td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        was.innerHTML = wasCal();
+        become.innerHTML = becomeCal();
+
+        initD.onchange = ir.onchange = months.onchange = function(){
+            was.innerHTML = wasCal();
+            become.innerHTML = becomeCal();
+        }
+
+        function wasCal(){
+            diaA.style.height = initD.value / 20000 * 100 + 'px';
+            return initD.value;
+        }
+
+        function becomeCal(){
+            let initial = initD.value;
+            let rate = ir.value / 100;
+            let month = document.getElementById('months').value;
+
+            let result = Math.round(initial * Math.pow( (1 + rate), month/12 ) );
+            diaB.style.height = result / 20000 * 100 + 'px';
+            return result;            
+        }
+
+        
+    </script>
+
+</body>
+</html>

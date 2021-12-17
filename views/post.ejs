@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <% let progresses = ['','未定','作業予定','作業中','作業終了'] %>
+    <% console.log(progresses[1]); %>
+</head>
+<body>
+    <a href="/"><p>戻る</p></a>
+    <h1>新しい作業を投稿する</h1>
+    <form action="/post" method="post">
+        締め切り：<input type="date" name="date">
+        場所：<input type="text" name="place" placeholder="場所">
+        画像：<input type="file" name="photo" placeholder="画像"><br>
+        作業内容：<input type="text" name="work" placeholder="作業内容">
+        <select name="category_id" id="category">
+            <option value=0> - -  カテゴリー  - - </option>
+        </select> 
+        <select name="progress" id="progress">
+            <option value=0> - -  進捗  - - </option>
+
+        </select> 
+        <input type="submit" value="投稿する">
+    </form>
+    
+    <% for(let i in categorys){ %>
+        <script>
+            var newOption = document.createElement('option');
+            newOption.innerHTML = "<%= categorys[i].category_name %>";
+            newOption.setAttribute('value', <%= categorys[i].id %>);
+            category.appendChild(newOption);
+        </script>
+    <% } %>
+    <% for(let i = 1; i < progresses.length; i++){ %>
+        <script>
+            var newOption = document.createElement('option');
+            newOption.setAttribute('value', <%=i%>);
+            newOption.innerHTML = "<%=progresses[i]%>"
+            progress.appendChild(newOption);
+        </script>
+    <% } %>
+    </body>
+</html>

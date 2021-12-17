@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function getTime(){
+            var dt = new Date();
+            var timestamp = dt.getFullYear()+
+            (String(dt.getMonth()+101).substr(1,2))+
+            (String(dt.getDate()+100).substr(1,2)+
+            (String(dt.getHours()+100).substr(1,2))+
+            (String(dt.getMinutes()+100).substr(1,2))+
+            (String(dt.getSeconds()+100).substr(1,2)));
+            timestamp.match(/(d{4})(d{2})(d{2})(d{2})(d{2})(d{2})/);
+            var datetime = RegExp.$1+'-'+RegExp.$2+'-'+RegExp.$3+' '+RegExp.$4+':'+RegExp.$5+':'+RegExp.$6;
+            return timestamp;
+        }
+        console.log(getTime());
+    </script>
+</body>
+</html>

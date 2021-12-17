@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <% let progresses = ['','未定','作業予定','作業中','作業終了'] %>
+</head>
+<body>
+    <a href="/"><p>戻る</p></a>
+    <h1>投稿確認</h1>
+    <p>以下の内容で投稿します</p>
+        <table>
+            <form action="/postConfirm" method="post">
+                <div>
+                    <tr>
+                        <td>日付</td>
+                        <td><input type="hidden" name="date" value="<%= posts.date %>"><%= posts.date %></td>
+                    </tr>
+                    <tr>
+                        <td>場所</td>
+                        <td><input type="hidden" name="place" value="<%= posts.place %>"><%= posts.place %></td>
+                    </tr>
+                    <tr>
+                        <td>作業内容</td>
+                        <td><input type="hidden" name="work" value="<%= posts.work %>"><%= posts.work %></td>
+                    </tr>
+                    <tr>
+                        <td>カテゴリー</td>
+                        <td><input type="hidden" name="category_id" value="<%= posts.category_id %>"><%= categorys[posts.category_id-1].category_name %></td>
+                    </tr>
+                    <tr>
+                        <td>進捗</td>
+                        <td><input type="hidden" name="progress" value="<%= posts.progress %>"><%= progresses[posts.progress] %></td>
+                    </tr>
+                    <input type="hidden" name="photo" value="<%= posts.photo %>">
+                    <input type="hidden" name="user_id" id="user_id">
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" value="この内容で投稿する"></td>
+                    </tr> 
+                </div>         
+            </form>
+        </table>
+        <script>
+            user_id.setAttribute('value', sessionStorage.getItem('id'));
+        </script>
+</body>
+</html>

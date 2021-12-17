@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #clock{ border:5px; border-style: dashed solid;}
+        #hour{ color:red; }
+        #min{ color:green; }
+        #sec{ color:blue; }
+    </style>
+
+</head>
+<body>
+    <div id="clock">
+        <span id="hour"></span>:<span id="min"></span>:<span id="sec"></span>
+    </div>
+<script>
+    function func(){
+        let date = new Date();
+        let hour = date.getHours(); if(hour < 10) hour = '0' + hour;
+        let min = date.getMinutes(); if(min < 10) min = '0' + min;
+        let sec = date.getSeconds(); if(sec < 10) sec = '0' + sec;
+
+        let clock = document.getElementById('clock');
+        clock.children[0].innerHTML = hour;
+        clock.children[1].innerHTML = min;
+        clock.children[2].innerHTML = sec;
+    }
+    func();
+    setInterval( () => func(), 1000);
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>この内容で登録しますか</p>
+    <table>
+        <form action="registerConfirm" method="post">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <tr>
+            <td>名前</td>
+            <td><input type="hidden" name="name" value="<%= name %>"><%= name %></td>
+        </tr>
+        <tr>
+            <td>パスワード</td>
+            <td><input type="hidden" name="pass" value="<%= pass %>"><%= pass %></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="この内容で登録する"></td>
+        </tr>
+    </form>
+    </table>
+</body>
+</html>

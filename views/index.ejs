@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div id="header">
+        <script>
+            let id = sessionStorage.getItem('id');
+            let name = sessionStorage.getItem('name');
+            if(id == 'undefined' || id == null || name == 'undefined' || name == null){
+                let a1 = document.createElement('a');
+                let a2 = document.createElement('a');
+                a1.setAttribute('href','/register');
+                a2.setAttribute('href','/login');
+                a1.innerHTML = '登録画面へ';
+                a2.innerHTML = 'ログイン画面へ';
+                header.appendChild(a1);
+                header.appendChild(a2);
+            }else{
+                let p = document.createElement('p');
+                let a2 = document.createElement('a');
+                let a4 = document.createElement('a');
+                let a5 = document.createElement('a');
+                
+                a2.setAttribute('href','/logout');
+                a4.setAttribute('href','/post');
+                a5.setAttribute('href','/list');
+
+                p.innerHTML = `ID : ${id}   ${name}さん`;
+                a2.innerHTML= 'ログアウトする';
+                a4.innerHTML= '投稿画面へ';
+                a5.innerHTML= '投稿一覧へ';
+
+                header.appendChild(p);
+                header.appendChild(a2);
+                header.appendChild(a4);
+                header.appendChild(a5);
+            }
+        </script>
+    </div>
+    <div class="container" style="margin-top:50px;">
+        <h2>所属メンバー一覧</h2>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">name</th>                    
+                </tr>
+            </thead>
+            <tbody>
+            <% for(let i in contents) { %>
+            <tr>
+                <% let obj = contents[i]; %>
+                <% if(obj.id == null || obj.name == null) continue; %>
+                <th>
+                    <!--<button onclick="view(<%= obj.name %>);"><%= obj.id %></button>-->
+                    <%= obj.id %>
+                </th>
+                <th>
+                    <!--<a href="/id/<%= obj.id %>"><%= obj.name %></a> -->
+                    <%= obj.name %>
+                </th>
+            </tr>
+            <% } %>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function view(id){;
+            alert(id);
+        }
+    </script>
+</body>
+</html>

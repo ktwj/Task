@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .off{display:none;}
+        .unset{color:red;}
+        .head{background-color: lightgreen;}
+        .progress1{background-color: #eee;}
+        .progress2{background-color: #bbb;}
+        .progress3{background-color: #888;}
+        .progress4{background-color: #555;}
+
+        table{text-align: right;}
+            .head{text-align: center;}
+                .idColumn{width:10%}
+                .userIdColumn{width:10%}
+                .dateColumn{width:110px}
+                .placeColumn{width:110px}
+                .workColumn{width:110px}
+                .categoryColumn{width:130px}
+                .progressColumn{width:80px}
+                .manuColumn{width:105px;}  
+                .btn{text-align: center;}
+
+    </style>
+    <script>
+        function editC(id){
+            location.href = `/${id}/edit`;
+        }
+        function deleteC(id){
+            location.href = `/${id}/delete`;
+        }
+        function btn(user_id,id){
+            if(Number(user_id) == Number(sessionStorage.getItem('id'))){
+                let editBtn = document.createElement('button');
+                let deleteBtn = document.createElement('button');
+
+                editBtn.setAttribute('onclick', `editC(${id})`);
+                deleteBtn.setAttribute('onclick',`deleteC(${id})`);
+                editBtn.innerHTML = "編集";
+                deleteBtn.innerHTML = "削除";
+
+                let div = document.getElementById('btn'+id);
+                div.appendChild(editBtn);
+                div.appendChild(deleteBtn);
+            }
+        }
+        <% const progresses = ['','未定','作業予定','作業中','終了'] %>
+    </script>
+</head>
+<body>
+    <a href="/">戻る</a>
+    
+    <form action="/list" method="post">
+        場所：<input type="text" name="place" placeholder="場所"><br>
+        作業内容：<input type="text" name="work" placeholder="作業内容">
+        <select name="category_id" id="category">
+            <option value=0> - -  カテゴリー  - - </option>
+        </select> 
+        <select name="progress" id="progress">
+            <option value=0> - -  進捗  - - </option>>
+        </select> 
+        <input type="submit" value="検索する">
+    </form>
+
+        <table id ="tabless">
+            <tr class="head">
+                <td class="idColumn">ID</td>
+                <td class="userIdColumn">ユーザ名</td>
+                <td class="dateColumn">日付</td>
+                <td class="placeColumn">場所</td>
+                <td class="workColumn">作業</td>
+                <td class="categoryColumn">カテゴリー</td>
+                <td class="progressColumn">進捗</td>
+                <td class="manuColumn">操作</td>
+            </tr>
+
+        </table>
+
+        <% for(let i in contents){ %>
+        <% let list = contents[i]; %>
+        <script>
+            var table1 = document.createElement('tr')
+
+            //id
+            var idTd = document.createElement('td');
+            idTd.innerHTML = "<%= list.id %>";
+            table1.appendChild(idTd);
+
+            //名前
+            var nameTd = document.createElement('td');
+            var tdn = "<% let tdname;for(let i in users){if(users[i].id == list.user_id){tdname =  users[i].name;}}%><%= tdname %>";
+            nameTd.innerHTML = tdn;
+            table1.appendChild(nameTd);
+            console.log(tdn);
+
+            //日付
+            var dateTd = document.createElement('td');
+            var tdd = "<% var tddate; tddate = list.date.getFullYear();if(Number(list.date.getMonth()+1) < 10){tddate += '-0'+Number(list.date.getMonth()+1);}else{tddate += '-'+Number(list.date.getMonth()+1);}if(Number(list.date.getDate()) < 10){tddate += '-0'+list.date.getDate();}else{tddate += '-'+list.date.getDate();}%><%= tddate %>";
+            dateTd.innerHTML = tdd;
+            table1.appendChild(dateTd);
+
+            //場所
+            var placeTd = document.createElement('td');
+            placeTd.innerHTML = "<%= list.place %>";
+            table1.appendChild(placeTd);
+
+            //仕事内容
+            var workTd = document.createElement('td');
+            workTd.innerHTML = "<%= list.work %>";
+            table1.appendChild(workTd);
+
+            //カテゴリー
+            var categoryTd = document.createElement('td');
+            var tdcn = `<% var tdcana; if(categorys[list.category_id-1]?.category_name == undefined ){tdcana = '未設定';}else{tdcana = categorys[list.category_id-1].category_name;}%><%= tdcana %>`;
+            categoryTd.innerHTML = tdcn;
+            table1.appendChild(categoryTd);
+
+            //進捗
+            var proTd = document.createElement('td');
+            var tdpr = "<%= progresses[list.progress] %>";
+            proTd.innerHTML = tdpr;
+            table1.appendChild(proTd);
+
+            //ボタン
+            var btnTd = document.createElement('td')
+            btnTd.setAttribute('id','btn<%= list.id %>');
+            var btnsc = document.createElement('script');
+            btnTd.appendChild(btnsc);
+            var tdbtn = `btn(JSON.parse("<%= JSON.stringify(list.user_id) %>"),JSON.parse("<%= JSON.stringify(list.id) %>"))`;
+            btnsc.innerHTML = tdbtn;
+            table1.appendChild(btnTd);
+
+            table1.classList.add('progress<%= list.progress %>');
+            tabless.appendChild(table1);
+        </script>
+        <% } %>
+
+<button onclick="location.href='/list'">再取得</button>
+
+<% for(let i in categorys){ %>
+    <script>
+        var newOption = document.createElement('option');
+        newOption.innerHTML = "<%= categorys[i].category_name %>";
+        newOption.setAttribute('value', <%= categorys[i].id %>);
+        category.appendChild(newOption);
+    </script>
+<% } %>
+<% for(let i = 1; i < progresses.length; i++){ %>
+    <script>
+        var newOption = document.createElement('option');
+        newOption.setAttribute('value', <%=i%>);
+        newOption.innerHTML = "<%=progresses[i]%>"
+        progress.appendChild(newOption);
+    </script>
+<% } %>
+</body>
+</html>

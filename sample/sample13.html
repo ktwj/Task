@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .invalid{background-color: red;}
+        #error{color:red};
+    </style>
+</head>
+<body>
+    <div id="sel">
+        <select id="color">
+            <option value="red">Red</option>
+        </select>
+    </div>
+      
+      <script>
+        let newOption1 = new Option("Blue", "blue",0);
+        color.append(newOption1);
+
+        let newOption2 = new Option('Green','green',2);
+        color.append(newOption2);
+      </script>
+
+      
+    メールアドレス：<input type="email" id="mail">
+    <div id="error"></div>
+    <script>
+        mail.onblur = function(){
+            if(!mail.value.includes('@')){
+                mail.classList.add('invalid');
+                error.innerHTML = '正しいメールアドレスを入力してください';
+                this.focus();
+            }else{
+                this.classList.remove('invalid');
+            }
+        }
+    </script>
+
+
+    <ul id="list">
+        <li tabindex="1">One</li>
+        <li tabindex="0">Zero</li>
+        <li tabindex="2">Two</li>
+        <li tabindex="-1">Minus one</li>
+    </ul>
+    <input id="number" value="">
+    
+    <style>
+        li { cursor: pointer; width:30%;}
+        :focus { outline: 1px dashed green; }
+    </style>
+    <script>
+        list.onclick = function(event){
+            let num = event.target.getAttribute('tabindex');
+            number.value = num;
+        }
+    </script>
+
+
+    <form id="form">
+        <input type="text" name="name" value="Name">
+        <input type="text" name="surname" value="Surname">
+    </form>
+    <script>
+        form.addEventListener('focusin', ()=> form.classList.add('focused'), true);
+        form.addEventListener('focusout', ()=> form.classList.remove('focused'), true);
+    </script>
+    <style> .focused { outline: 1px solid red; } </style>
+</body>
+</html>

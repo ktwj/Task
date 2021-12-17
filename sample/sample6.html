@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #largeImg{
+            width:400px;
+            height:400px;
+            margin-top:50px;
+            margin-left: 45px;
+            padding:3px;
+            border:2px solid #ccc;
+        }
+        #thumbs li{
+            display:inline-block;
+        }
+        #thumbs img{
+            width:80px;
+            height:80px;
+            border:2px solid #ccc;
+            padding:5px;
+            margin:3px;
+        }
+    </style>
+
+</head>
+<body>
+    <button id="elem" onclick="alert('a');">アラート1</button>
+    <button id="elem2">アラート2</button>
+    <b ondblclick="alert('dblclick')" onmousedown="return false">Double-click me</b>
+
+    <p><img id="largeImg" src="image/image1.jpeg" alt="Large image"></p>
+
+    <ul id="thumbs">
+      <li><a><img src="image/image1.jpeg" title="Image 1"></a></li>
+      <li><a><img src="image/image2.png" title="Image 2"></a></li>
+      <li><a><img src="image/image3.jpeg" title="Image 3"></a></li>
+      <li><a><img src="image/image4.jpeg" title="Image 4"></a></li>
+      <li><a><img src="image/image5.jpeg" title="Image 5"></a></li>
+    </ul>
+    <script>
+        thumbs.onclick = (event) => {
+            let target = event.target.closest('img');
+            if(target.nodeName != 'IMG') return false;
+            let href = target.getAttribute('src');
+            let title = target.getAttribute('title');
+            if(!href) return false;
+            largeImg.setAttribute('src',href);
+            largeImg.setAttribute('alt',title);
+            event.preventDefault();
+        }
+
+        function alertBtn(){
+            alert('alert');
+        }
+        let btnAction = new Event('click');
+        elem.dispatchEvent(btnAction);
+
+        document.addEventListener('hello',function(event){
+            alert("Hello from " + event.target.innerHTML);
+        });
+        let event2 = new Event('hello',{bubbles:true,cancelable:true});
+        elem2.dispatchEvent(event2);
+    </script>
+
+</body>
+</html>

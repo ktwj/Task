@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #failed{display:none;color:red;}
+    </style>
+    <script>
+        function red(){
+            failed.style.display = 'block';
+        }
+        function store(id,name){
+            sessionStorage.setItem('name',name);
+            sessionStorage.setItem('id',id);
+        }
+    </script>
+</head>
+<body>
+    <form action="/login" method="post">
+        名前 : <input type="text" name="name"><br>
+        パス : <input type="password" name="pass"><br>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <input type="submit" value="ログイン">
+    </form>
+    
+    <span id="failed">※IDかパスワードが違います</span>
+
+    <% if(typeof fail !== 'undefined') { %>
+        <script>red();</script>
+
+    <% }else if(typeof contents !== 'undefined'){ %>
+        <script>
+            store(<%= contents[0].id %>, '<%= contents[0].name %>');
+            location.href='/top';
+        </script>
+    <% }else{ %>
+    <% } %>
+</body>
+</html>
