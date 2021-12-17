@@ -19,11 +19,11 @@
     </script>
 </head>
 <body>
-    <a href="/">戻る</a>
+    <a href="/">戻る</a><br>
     <form action="/login" method="post">
-        Name : <input type="text" name="name">　　testID : test<br>
-        Pass : <input type="password" name="pass">　　testPassword : test<br>
-        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        名前 : <input type="text" name="name">　　testID : test<br>
+        パス : <input type="password" name="pass">　　testPassword : test<br>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>"><br>
         <input type="submit" value="ログイン">
     </form>
     
