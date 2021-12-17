@@ -12,7 +12,7 @@
     <h1>作業タスクを編集する</h1>
     <form action="/doneEdit" method="post">
         <input type="hidden" name="id" value="<%=id%>"
-        <input type="date" name="date" value="<%= contents[0].date.getFullYear() %>-<%= (contents[0].date.getMonth()<10)? '0'+contents[0].date.getMonth()+1 : contents[0].date.getMonth()+1 %>-<%= (contents[0].date.getDate()<10)? '0'+contents[0].date.getDate() : contents[0].date.getDate() %>">
+        <input type="date" name="date" value="<%= contents[0].date %>">
         <input type="text" name="place" value="<%= contents[0].place %>">
         <!--<input type="file" name="photo" value="<%= //contents[0].photo %>">-->
         <input type="text" name="work" value="<%= contents[0].work %>">
