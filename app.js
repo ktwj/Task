@@ -106,7 +106,7 @@ app.get('/post', (req,res) => {
 });
 
 app.post('/post', (req,res) => {
-    if(req.body.work=='' || req.body.place=='' || checkDate(req.body.date) || req.body.category_id==-1 || !req.body.progress ==0){
+    if(req.body.work=='' || req.body.place=='' || checkDate(req.body.date) || req.body.category_id==-1 || req.body.progress ==0){
         let sql = 'select * from categorys where deleted_at is null';
         let m = '空白があります。';
         con.query(sql,
