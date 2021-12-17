@@ -28,7 +28,7 @@
         <script>
             var newOption = document.createElement('option');
             newOption.innerHTML = "<%= categorys[i].category_name %>";
-            newOption.setAttribute('value', <%= categorys[i].id %>);
+            newOption.setAttribute('value', <%= categorys[i].id-1 %>);
             category.appendChild(newOption);
         </script>
     <% } %>
