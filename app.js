@@ -237,8 +237,8 @@ app.post('/:id/edit', (req,res) => {
         (err, results) => {
             if(err) throw err;
 
-            let sql = 'Update posts Set date=?, place=?, work=?, category_id=?, progress=? updated_at=? where id=?';
-            let ins = [req.body.date, req.body.place, req.body.work, req.body.category, req.body.progress, now, req.body.id];
+            let sql = 'Update posts Set date=?, place=?, work=?, category_id=?, progress=? where id=?';
+            let ins = [req.body.date, req.body.place, req.body.work, req.body.category, req.body.progress,  req.body.id];
             con.query(sql,ins,
                 (err, results) => {
                     if(err) throw err;
