@@ -257,7 +257,7 @@ app.post('/doneEdit', (req,res) => {
                 (err, results) => {
                     if(err) throw err;
                     console.log('CC')
-                    res.redirect('/top');
+                    res.redirect('/list');
             });
     });
 });
