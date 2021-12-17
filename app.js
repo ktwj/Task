@@ -93,15 +93,21 @@ app.post('/login',csrfProtection, (req, res) => {
 
 app.get('/post', (req,res) => {
     let sql = 'select * from categorys where deleted_at is null';
+    let m = '';
     con.query(sql,
         (err,categorys) => {
             if(err) throw err;
-             res.render('post.ejs', { categorys : categorys});
+             res.render('post.ejs', { categorys : categorys, m:m});
         }
     );
 });
 
 app.post('/post', (req,res) => {
+    if (req.body.work=='' || req.body.place==''){
+        let m = '空白があります。';
+        res.render('post.ejs', {m:m});
+    }
+
     sql = 'select * from categorys where deleted_at is null';
     con.query(sql,
         (err,categorys) => {
