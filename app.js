@@ -42,7 +42,7 @@ app.get('/register',csrfProtection, (req,res) => {
 });
 
 app.post('/register', csrfProtection,(req,res) => {
-    if (req.body.name=='' || req.body.password==''){res.redirect('register');}
+    if (req.body.name=='' || !req.body.name || !req.body.password || req.body.password==''){res.redirect('/register');}
     let sql = 'select * from users where name = ?';
     let ins = req.body.name;
     con.query(sql,ins,
