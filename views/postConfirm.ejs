@@ -16,7 +16,7 @@
                 <div>
                     <tr>
                         <td>日付</td>
-                        <td><input type="hidden" name="date" value="<%= posts.date %>"><%= posts.date %></td>
+                        <td><input type="hidden" name="date" value="<%= posts.date %>"><%= posts.date.setMonth(Number(posts.date.getMonth())+1) %></td>
                     </tr>
                     <tr>
                         <td>場所</td>
@@ -28,7 +28,7 @@
                     </tr>
                     <tr>
                         <td>カテゴリー</td>
-                        <td><input type="hidden" name="category_id" value="<%= posts.category_id %>"><%= categorys[posts.category_id].category_name %></td>
+                        <td><input type="hidden" name="category_id" value="<%= posts.category_id-1 %>"><%= categorys[posts.category_id-1].category_name %></td>
                     </tr>
                     <tr>
                         <td>進捗</td>

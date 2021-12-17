@@ -100,7 +100,7 @@
 
             //日付
             var dateTd = document.createElement('td');
-            var tdd = "<% var tddate; tddate = list.date.getFullYear();if(list.date.getMonth() < 10){tddate += '-0'+list.date.getMonth();}else{tddate += '-'+list.date.getMonth();}if(Number(list.date.getDate()) < 10){tddate += '-0'+list.date.getDate();}else{tddate += '-'+list.date.getDate();}%><%= tddate %>";
+            var tdd = "<% var tddate; tddate = list.date.getFullYear(); if(list.date.getMonth() < 10){tddate += '-0' +Number(list.date.getMonth())+1;}else{tddate += '-'+Number(list.date.getMonth())+1;}if(Number(list.date.getDate()) < 10){tddate += '-0'+list.date.getDate();}else{tddate += '-'+list.date.getDate();}%><%= tddate %>";
             dateTd.innerHTML = tdd;
             table1.appendChild(dateTd);
 
@@ -116,7 +116,7 @@
 
             //カテゴリー
             var categoryTd = document.createElement('td');
-            var tdcn = `<% var tdcana; if(categorys[list.category_id-1]?.category_name == undefined ){tdcana = '未設定';}else{tdcana = categorys[list.category_id-1].category_name;}%><%= tdcana %>`;
+            var tdcn = `<% var tdcana; if(categorys[list.category_id]?.category_name == undefined ){tdcana = '未設定';}else{tdcana = categorys[list.category_id].category_name;}%><%= tdcana %>`;
             categoryTd.innerHTML = tdcn;
             table1.appendChild(categoryTd);
 
