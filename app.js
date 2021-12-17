@@ -103,7 +103,7 @@ app.get('/post', (req,res) => {
 });
 
 app.post('/post', (req,res) => {
-    if(req.body.work=='' || req.body.place==''){
+    if(req.body.work=='' || req.body.place=='' || req.body.date==null || !req.body.date || req.body.date==0 || req.body.category_id==-1 || !req.body.progress ==0){
         let sql = 'select * from categorys where deleted_at is null';
         let m = '空白があります。';
         con.query(sql,
@@ -242,6 +242,23 @@ app.get('/:id/edit', csrfProtection, (req,res) => {
 });
 
 app.post('/doneEdit', (req,res) => {
+    if(req.body.work=='' || req.body.place=='' || req.body.date==null || !req.body.date || req.body.date==0 || req.body.category==-1 || !req.body.progress ==0){
+        let sql = 'select * from posts where deleted_at is null and id =?';
+        let ins = req.body.id;
+        con.query(sql,ins,
+            (err,results) => {
+                if(err) throw err;
+                
+                sql = 'select * from categorys where deleted_at is null';
+                con.query(sql, 
+                    (err,categorys) => {
+                        if(err) throw err;
+                        res.render('edit.ejs', {contents : results, id: ins , categorys:categorys});
+                    });
+            }
+        );
+    }
+
     let sql = 'update category_posts set deleted_at=? where id=?';
     let now = getTime();
     let ins = [now, req.body.id];
@@ -252,7 +269,7 @@ app.post('/doneEdit', (req,res) => {
 
             console.log('BB')
             let sql = 'Update posts Set date=?, place=?, work=?, category_id=?, progress=? where id=?';
-            let ins = [req.body.date, req.body.place, req.body.work, req.body.category, req.body.progress,  req.body.id];
+            let ins = [req.body.date, req.body.place, req.body.work, req.body.category, req.body.progress, req.body.id];
             con.query(sql,ins,
                 (err, results) => {
                     if(err) throw err;
