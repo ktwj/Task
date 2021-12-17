@@ -88,7 +88,7 @@
 
             //id
             var idTd = document.createElement('td');
-            idTd.innerHTML = "<%= list.id/10 %>";
+            idTd.innerHTML = "<%= parseInt(list.id/10) %>";
             table1.appendChild(idTd);
 
             //名前
