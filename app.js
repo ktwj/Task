@@ -1,4 +1,4 @@
-// mysql://b9af421ed731e2:6121bd6e@us-cdbr-east-05.cleardb.net/heroku_2ad1200fa642094?reconnect=true
+
 
 const express = require('express');
 const csrf = require('csurf');
